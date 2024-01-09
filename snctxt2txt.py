@@ -23,23 +23,23 @@ def process_data(in_data):
 
 if __name__ == "__main__":
     # Search for all snctxt files in the current directory, but only pick the first one...will still work if only one file in dir...so only repro
-    file_in = glob("*.snctxt")[0]
+    files_in = glob("*.snctxt")
+    for file in files_in:
+        #Name out file whatever in file is but as txt file
+        file_out = f"{file.split('.')[0]}.txt"
 
-    #Name out file whatever in file is but as txt file
-    file_out = f"{file_in.split('.')[0]}.txt"
+        # Pattern here is for start-extraction and end-extraction...basically when to roll camera and when to cut.
+        pattern = ['BEGIN DOSE TABLE','END DOSE TABLE']
 
-    # Pattern here is for start-extraction and end-extraction...basically when to roll camera and when to cut.
-    pattern = ['BEGIN DOSE TABLE','END DOSE TABLE']
+        # Read snctxt file
+        with open (file,'r') as f:    
+            in_data = f.readlines()
+        
+        out_data = process_data(in_data)
 
-    # Read snctxt file
-    with open (file_in,'r') as f:    
-        in_data = f.readlines()
-    
-    out_data = process_data(in_data)
-
-    # To clean and remove tab indent
-    out_data = [x[1:] for x in out_data]
-                    
-    # Writing data out to txt                
-    with open (file_out,'w') as f:
-        f.writelines(out_data)
+        # To clean and remove tab indent
+        out_data = [x[1:] for x in out_data]
+                        
+        # Writing data out to txt                
+        with open (file_out,'w') as f:
+            f.writelines(out_data)
