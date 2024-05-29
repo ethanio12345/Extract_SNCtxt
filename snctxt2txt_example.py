@@ -5,7 +5,7 @@ from pathlib import Path
 
 if __name__ == "__main__":
     # Search for all snctxt files in the current directory, but only pick the first one...will still work if only one file in dir...so only repro
-    files_in = [Path(x).resolve() for x in glob("*.snctxt")]
+    files_in = [Path(x) for x in glob("*.snctxt")]
     for i, file in enumerate(files_in):
         print(file.name)
 
