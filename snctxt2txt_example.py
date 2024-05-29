@@ -26,7 +26,8 @@ if __name__ == "__main__":
             # To clean and remove tab indent
             # Slicing appears to be valid here as even normalise then smooth only has single line under begin dose table flag
             out_data = [x + "\n" for x in dose_table[2:]]
-            summary_data = [x + "\n" for x in scan.splitlines() if "Summary" in x]
+            summary_data = [x + "\n" for x in scan.splitlines() if "Summary" in x or "Field Detector Model" in x or "Reference Detector Model" in x]
+
             # Writing data out to txt                
             with open ((file.parent / f"{file.stem}_{i}.txt"),'w') as f:
                 f.writelines(summary_data)
