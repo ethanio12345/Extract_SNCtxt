@@ -1,1 +1,0 @@
-from .snctxt2txt import process_data
